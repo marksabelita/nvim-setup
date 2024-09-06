@@ -64,9 +64,21 @@ function customizeHighlights()
   vim.bo.modifiable = modifiable_was_enabled
 end
 
-keymap.set("n", "<leader>al", ":colorscheme catppuccin-latte<CR>")
+keymap.set("n", "<leader>al", ":colorscheme dayfox<CR>")
 keymap.set("n", "<leader>an", ":colorscheme arctic<CR>")
 keymap.set("n", "<leader>ab", "<cmd>lua customizeHighlights()<CR>")
 keymap.set("n", "<leader>av", ":colorscheme catppuccin-macchiato<CR>")
 
 keymap.set("n", "<leader>j", "<cmd>execute '%!python -m json.tool' <CR>")
+keymap.set("n", "gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
+keymap.set("n", "gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", { noremap = true })
+keymap.set("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", { noremap = true })
+keymap.set("n", "gpD", "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>", { noremap = true })
+keymap.set("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>", { noremap = true })
+keymap.set("n", "gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
+keymap.set("n", "gpr", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", { noremap = true })
+
+
+
+keymap.set("n", "<Leader>nf", ":lua require('neogen').generate()<CR>", opts)
+
