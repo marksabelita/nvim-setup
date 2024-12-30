@@ -9,7 +9,3 @@ vim.api.nvim_create_autocmd("VimEnter", {
     vim.cmd("hi! NonText guibg=NONE ctermbg=NONE")
   end,
 })
-
-require("notify").setup({
-  background_colour = "#000000",
-})

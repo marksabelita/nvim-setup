@@ -40,7 +40,7 @@ keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
 -- keymap.set("n", "<leader>t", ":split | terminal<CR>", opts)
 keymap.set("n", "<C-q>", ":bwipeout!<CR>:bprevious<CR>", opts)
 -- keymap.set("i", "<S-BS>", "<C-w>", opts)
-keymap.set("i", "<C-W>", "<C-O>dB", opts)
+-- keymap.set("i", "<C-W>", "<C-O>dB", opts)
 
 --jumplist
 keymap.set("n", "1", "10j")
@@ -78,7 +78,30 @@ keymap.set("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>", { 
 keymap.set("n", "gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
 keymap.set("n", "gpr", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", { noremap = true })
 
-
-
 keymap.set("n", "<Leader>nf", ":lua require('neogen').generate()<CR>", opts)
 
+vim.keymap.set("i", "i", "i", { noremap = true })
+vim.keymap.set("i", "<Esc>", "<Esc>", { noremap = true })
+
+vim.g.lazyvim_no_defaults = true
+
+vim.api.nvim_create_user_command("CheckInsertMaps", function()
+  print(vim.inspect(vim.api.nvim_get_keymap("i")))
+end, {})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    -- Clear any existing 'i' mapping
+    vim.keymap.set("i", "i", "i", { noremap = true, silent = true })
+    -- Ensure Esc works properly
+    vim.keymap.set("i", "<Esc>", "<Esc>", { noremap = true, silent = true })
+  end,
+})
+
+-- Optionally disable mini pairs if it's causing issues
+vim.g.minipairs_disable = true
+
+-- Or disable specific mini pairs mappings
+vim.g.minipairs_disable_map = {
+  ["i"] = true,
+}

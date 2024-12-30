@@ -25,13 +25,12 @@ require("lazy").setup({
     -- add LazyVim and import its plugin,s
 
     { "LazyVim/LazyVim", import = "lazyvim.plugins", opts = {
-      colorscheme = "arctic",
+      colorscheme = "github_dark",
     } },
 
     -- import any extras modules here
     { import = "lazyvim.plugins.extras.linting.eslint" },
     { import = "lazyvim.plugins.extras.formatting.prettier" },
-    { import = "lazyvim.plugins.extras.coding.copilot" },
     { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.test.core" },

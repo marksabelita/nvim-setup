@@ -38,7 +38,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "arctic",
+      colorscheme = "github_dark",
     },
   },
   -- change trouble config
@@ -65,125 +65,90 @@ return {
       table.insert(opts.sources, { name = "emoji" })
     end,
   },
-  -- change some telescope options and a keymap to browse plugin files
-  {
-    "nvim-telescope/telescope.nvim",
-    keys = {
-      -- add a keymap to browse plugin files
-      -- stylua: ignore
-      {
-        "<leader>fp",
-        function() require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root }) end,
-        desc = "Find Plugin File",
-      },
-    },
-    -- change some options
-    opts = {
-      defaults = {
-        layout_strategy = "horizontal",
-        layout_config = { prompt_position = "top" },
-        sorting_strategy = "ascending",
-        winblend = 0,
-        file_ignore_patterns = { "node_modules" },
-      },
-    },
-  },
 
   -- add telescope-fzf-native
-  {
-    "telescope.nvim",
-    dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
-      config = function()
-        require("telescope").load_extension("fzf")
-      end,
-    },
-  },
-
-  -- add pyright to lspconfig
-  {
-    "neovim/nvim-lspconfig",
-    ---@class PluginLspOpts
-    opts = {
-      pyflakes = {
-        enabled = true,
-        ignore = { "E501", "E231" },
-        maxLineLength = 120,
-      },
-      pycodestyle = {
-        enabled = true,
-        ignore = { "E501", "E231" },
-        maxLineLength = 120,
-      },
-      servers = {
-        -- pyright will be automatically installed with mason and loaded with lspconfig
-        pyright = {},
-        ruff_lsp = {
-          keys = {
-            {
-              "<leader>co",
-              function()
-                vim.lsp.buf.code_action({
-                  apply = true,
-                  context = {
-                    only = { "source.organizeImports" },
-                    diagnostics = {},
-                  },
-                })
-              end,
-              desc = "Organize Imports",
-            },
-          },
-        },
-      },
-    },
-    setup = {
-      ruff_lsp = function()
-        require("lazyvim.util").lsp.on_attach(function(client, _)
-          if client.name == "ruff_lsp" then
-            -- Disable hover in favor of Pyright
-            client.server_capabilities.hoverProvider = false
-          end
-        end)
-      end,
-    },
-  },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   ---@class PluginLspOpts
+  --   opts = {
+  --     pyflakes = {
+  --       enabled = true,
+  --       ignore = { "E501", "E231" },
+  --       maxLineLength = 120,
+  --     },
+  --     pycodestyle = {
+  --       enabled = true,
+  --       ignore = { "E501", "E231" },
+  --       maxLineLength = 120,
+  --     },
+  --     servers = {
+  --       -- pyright will be automatically installed with mason and loaded with lspconfig
+  --       pyright = {},
+  --       ruff_lsp = {
+  --         keys = {
+  --           {
+  --             "<leader>co",
+  --             function()
+  --               vim.lsp.buf.code_action({
+  --                 apply = true,
+  --                 context = {
+  --                   only = { "source.organizeImports" },
+  --                   diagnostics = {},
+  --                 },
+  --               })
+  --             end,
+  --             desc = "Organize Imports",
+  --           },
+  --         },
+  --       },
+  --     },
+  --   },
+  --   setup = {
+  --     ruff_lsp = function()
+  --       require("lazyvim.util").lsp.on_attach(function(client, _)
+  --         if client.name == "ruff_lsp" then
+  --           -- Disable hover in favor of Pyright
+  --           client.server_capabilities.hoverProvider = false
+  --         end
+  --       end)
+  --     end,
+  --   },
+  -- },
 
   -- add tsserver and setup with typescript.nvim instead of lspconfig
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      "jose-elias-alvarez/typescript.nvim",
-      init = function()
-        require("lazyvim.util").on_attach(function(_, buffer)
-          -- stylua: ignore
-          vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
-          vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
-        end)
-      end,
-    },
-    ---@class PluginLspOpts
-    opts = {
-      ---@type lspconfig.options
-      servers = {
-        -- tsserver will be automatically installed with mason and loaded with lspconfig
-        tsserver = {},
-      },
-      -- you can do any additional lsp server setup here
-      -- return true if you don't want this server to be setup with lspconfig
-      ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-      setup = {
-        -- example to setup with typescript.nvim
-        tsserver = function(_, opts)
-          require("typescript").setup({ server = opts })
-          return true
-        end,
-        -- Specify * to use this function as a fallback for any server
-        -- ["*"] = function(server, opts) end,
-      },
-    },
-  },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   dependencies = {
+  --     "jose-elias-alvarez/typescript.nvim",
+  --     init = function()
+  --       require("lazyvim.util").on_attach(function(_, buffer)
+  --         -- stylua: ignore
+  --         vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
+  --         vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
+  --       end)
+  --     end,
+  --   },
+  --   ---@class PluginLspOpts
+  --   opts = {
+  --     ---@type lspconfig.options
+  --     servers = {
+  --       -- tsserver will be automatically installed with mason and loaded with lspconfig
+  --       tsserver = {},
+  --     },
+  --     -- you can do any additional lsp server setup here
+  --     -- return true if you don't want this server to be setup with lspconfig
+  --     ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
+  --     setup = {
+  --       -- example to setup with typescript.nvim
+  --       tsserver = function(_, opts)
+  --         require("typescript").setup({ server = opts })
+  --         return true
+  --       end,
+  --       -- Specify * to use this function as a fallback for any server
+  --       -- ["*"] = function(server, opts) end,
+  --     },
+  --   },
+  -- },
 
   ---- code formatting
 
@@ -215,18 +180,30 @@ return {
   {
     -- use official lspconfig package (and enable completion):
     "neovim/nvim-lspconfig",
+    opts = {
+      capabilities = {
+        textDocument = {
+          foldingRange = {
+            dynamicRegistration = false,
+            lineFoldingOnly = true,
+          },
+        },
+      },
+    },
     dependencies = { "hrsh7th/cmp-nvim-lsp" },
     config = function()
       local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
       local lsp_on_attach = function(client, bufnr)
         local bufopts = { noremap = true, silent = true, buffer = bufnr }
+        local keys = require("lazyvim.plugins.lsp.keymaps").get()
+        -- Remove the problematic mapping
+        keys["i"] = nil
         -- following keymap is based on both lspconfig and lsp-zero.nvim:
         -- - https://github.com/neovim/nvim-lspconfig/blob/fd8f18fe819f1049d00de74817523f4823ba259a/README.md?plain=1#L79-L93
         -- - https://github.com/VonHeikemen/lsp-zero.nvim/blob/18a5887631187f3f7c408ce545fd12b8aeceba06/lua/lsp-zero/server.lua#L285-L298
-        vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
         vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+        vim.keymap.set("n", "gD", vim.lsp.buf.definition, bufopts)
+        vim.keymap.set("n", "gd", vim.lsp.buf.declaration, bufopts)
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
         vim.keymap.set("n", "go", vim.lsp.buf.type_definition, bufopts)
         vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)

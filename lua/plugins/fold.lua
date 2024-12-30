@@ -1,19 +1,9 @@
 return {
 
   -- add folding range to capabilities
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      capabilities = {
-        textDocument = {
-          foldingRange = {
-            dynamicRegistration = false,
-            lineFoldingOnly = true,
-          },
-        },
-      },
-    },
-  },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  -- },
 
   {
     "kevinhwang91/nvim-ufo",

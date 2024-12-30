@@ -1,7 +1,21 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
-  event = "LazyFile",
+  main = "ibl",
   opts = {
-    scope = { enabled = false },
+    indent = {
+      char = "│",
+      highlight = "IblIndent",
+    },
+    whitespace = {
+      highlight = "IblWhitespace",
+      remove_blankline_trail = true,
+    },
+    scope = {
+      enabled = true,
+      char = "│",
+      show_start = true,
+      show_end = true,
+      highlight = "IblScope",
+    },
   },
 }

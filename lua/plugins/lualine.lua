@@ -10,6 +10,7 @@ return {
       opts.sections.lualine_y = {}
       opts.sections.lualine_x = {}
       opts.sections.lualine_c = {}
+      -- opts.theme = require("filename").theme()
     end,
   },
 }
