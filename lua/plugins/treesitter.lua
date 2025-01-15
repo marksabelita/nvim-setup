@@ -73,6 +73,8 @@ return {
       "vimdoc",
       "yaml",
       "templ",
+      "hcl",
+      "terraform",
     },
     incremental_selection = {
       enable = true,

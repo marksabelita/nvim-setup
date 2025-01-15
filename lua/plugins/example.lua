@@ -246,6 +246,8 @@ return {
         "typescript",
         "vim",
         "yaml",
+        "hcl",
+        "terraform",
       },
     },
   },

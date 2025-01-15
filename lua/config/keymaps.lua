@@ -7,8 +7,6 @@ vim.opt.winbar = "%=%m %f"
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
-vim.api.nvim_set_keymap("i", "<C-/>", 'copilot#Accept("<CR>")', opts)
-
 --  Increment/decrement
 keymap.set("n", "+", "<C-a>")
 keymap.set("n", "-", "C-x")
@@ -64,8 +62,8 @@ function customizeHighlights()
   vim.bo.modifiable = modifiable_was_enabled
 end
 
-keymap.set("n", "<leader>al", ":colorscheme dayfox<CR>")
-keymap.set("n", "<leader>an", ":colorscheme arctic<CR>")
+keymap.set("n", "<leader>al", ":colorscheme github_light<CR>")
+keymap.set("n", "<leader>an", ":colorscheme github_dark<CR>")
 keymap.set("n", "<leader>ab", "<cmd>lua customizeHighlights()<CR>")
 keymap.set("n", "<leader>av", ":colorscheme catppuccin-macchiato<CR>")
 
@@ -105,3 +103,14 @@ vim.g.minipairs_disable = true
 vim.g.minipairs_disable_map = {
   ["i"] = true,
 }
+
+local curl = require("curl")
+curl.setup({})
+
+vim.keymap.set("n", "<leader>ewq", function()
+  curl.create_global_collection()
+end, { desc = "Create or open a global collection with a name from user input" })
+
+vim.keymap.set("n", "<leader>qwe", function()
+  curl.pick_global_collection()
+end, { desc = "Choose a global collection and open it" })
